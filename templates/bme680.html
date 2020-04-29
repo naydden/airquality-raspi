@@ -1,6 +1,31 @@
 {% extends "layout.html" %}
 {% block title %}BME680{% endblock %}
 {% block content %}
-	<h1 class="cover-heading">Current Temperature is: </h1>
-	<p class="lead">36deg</p>
+	<h1 class="cover-heading">Current data: </h1>
+	<div style="height: 300px; overflow-y: scroll;">
+	<table class="table">
+	  <thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Timestamp</th>
+			<th scope="col">Temperature [ºC]</th>
+			<th scope="col">Pressure [hPa]</th>
+			<th scope="col">Humidity [%]</th>
+			<th scope="col">Air Quality [0-100]</th>
+		</tr>
+	  </thead>
+	  <tbody>
+			{% for air in air_data %}
+				<tr>
+					<th scope="row">{{air.id}}</th>
+					<td>{{air.timestamp}}</td>
+					<td>{{air.temperature}}</td>
+					<td>{{air.pressure}}</td>
+					<td>{{air.humidity}}</td>
+					<td>{{air.airquality}}</td>
+				</tr>
+			{% endfor %}
+	  </tbody>
+	</table>
+	</div>
 {% endblock %}
