@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" class="cye-disabled cye-lm">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="Boyan Naydenov">
+	<title>{% block title %}{% endblock %} - Boyan's Raspberry PI</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="{{ url_for('static', filename='scripts/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+
+	<!-- Custom CSS -->
+	<link href="{{ url_for('static', filename='style/index.css') }}" rel="stylesheet">
+
+	<script type=text/javascript src="{{url_for('static', filename='scripts/jquery/jquery-3.5.0.js') }}"></script>
+	<script type=text/javascript src="{{url_for('static', filename='scripts/bootstrap/js/bootstrap.min.js') }}"></script>
+
+
+</head>
+
+
+<html>
+
+<body class="text-center" style="">
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+		<header class="masthead mb-auto">
+			<div class="inner">
+				<h3 class="masthead-brand">naydden</h3>
+				<nav class="nav nav-masthead justify-content-center">
+					<a class="nav-link" href="{{ url_for('index') }}">Home</a>
+					<a class="nav-link" href="{{ url_for('bme680') }}">BME680</a>
+				</nav>
+			</div>
+		</header>
+
+		<main role="main" class="inner cover">
+			{% block content %}{% endblock %}
+		</main>
+
+		<footer class="mastfoot mt-auto">
+			<div class="inner">
+				<p>Check me out at <a href="https://twitter.com/naydden">@naydden</a>.</p>
+			</div>
+		</footer>
+	</div>
+
+</body>
+</html>
