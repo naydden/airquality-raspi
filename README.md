@@ -1,6 +1,6 @@
 # realtime-webraspi
 
-Dockerized Raspberry Pi web app for measuring air quality together with temperature, pressure and humidity.
+Raspberry Pi web app for measuring air quality together with temperature, pressure and humidity.
 
 Technology:
 
@@ -9,3 +9,8 @@ Technology:
 - Flask
 
 It is intended to function as a home monitoring system, pushing data in real time to any client that may be listening on a specific port.
+
+Requirements:
+
+- Python 3
+- pip3 install requirements.txt
