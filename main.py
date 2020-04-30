@@ -13,7 +13,7 @@ sensor = Sensor(bme680)
 sensor.initialise(bme680)
 
 ### Connect to Database and create database session
-engine = create_engine('sqlite:///air-data.db')
+engine = create_engine('sqlite:///air-data.db', connect_args={'check_same_thread': False})
 Base.metadata.bind = engine
 
 ### Define routes
