@@ -1,9 +1,10 @@
-FROM ubuntu:16.04
+FROM raspbian/stretch
 
 MAINTAINER Boyan Naydenov "boyan.naydenov@gmail.com"
 
 RUN apt-get update -y && \
-    apt-get install -y python3 python3-dev python3-pip
+    apt-get install -y python3 python3-dev python3-pip && \
+    apt-get instlal -y python3-smbus
 
 RUN apt-get install -y git
 
@@ -13,7 +14,6 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
 
 # BME680 related libraries. This will only work on a Raspberry PI since it needs GPIO access.
 
@@ -29,4 +29,4 @@ COPY . /app
 
 ENTRYPOINT [ "python3" ]
 
-CMD [ "main.py" ]
+CMD [ "-u", "main.py" ]

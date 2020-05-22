@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  tvoc:
+    build: './tvoc'
+  web:
+    build: './web'
+  mydb:
+    image: postgress

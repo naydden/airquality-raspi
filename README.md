@@ -1,6 +1,10 @@
 # realtime-webraspi
 
-Raspberry Pi web app for measuring air quality together with temperature, pressure and humidity.
+Microservice application that measures air quality together with temperature, pressure and humidity. Composed of three main services:
+
+- tvoc: uses bme680 sensor to extract data.
+- mydb: saves data into a persisten database with a volume.
+- web: shows data from mydb into the browser.
 
 Technology:
 
@@ -11,6 +15,3 @@ Technology:
 It is intended to function as a home monitoring system, pushing data in real time to any client that may be listening on a specific port.
 
 Requirements:
-
-- Python 3
-- pip3 install requirements.txt
