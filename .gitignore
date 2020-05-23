@@ -1,3 +1,6 @@
 venv/
 examples/
 __pycache__/
+data/
+env.env
+dump.gz

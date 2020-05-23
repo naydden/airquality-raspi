@@ -1,5 +1,12 @@
 # realtime-webraspi
 
+## For generating backup file
+docker-compose exec -T mydb mongodump -u root -p raspi_root --authenticationDatabase admin --archive --gzip --db air_data > dump.gz
+
+## For recovring backup file
+docker-compose exec -T db mongorestore --archive --gzip < dump.gz
+
+
 Microservice application that measures air quality together with temperature, pressure and humidity. Composed of three main services:
 
 - tvoc: uses bme680 sensor to extract data.

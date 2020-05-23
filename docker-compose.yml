@@ -1,9 +1,19 @@
 version: '3'
 
 services:
-  tvoc:
-    build: './tvoc'
-  web:
-    build: './web'
-  mydb:
-    image: postgress
+    mydb:
+        container_name: mydb
+        image: mongo:latest
+        env_file:
+            - env.env
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASS}
+        ports:
+            - '27017:27017'
+        volumes:
+            - mongodb_air:/data/db
+    test:
+        build: './test'
+volumes:
+    mongodb_air:

@@ -14,6 +14,7 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN pip3 install --upgrade pip
+RUN pip3 install pymongo
 
 # BME680 related libraries. This will only work on a Raspberry PI since it needs GPIO access.
 
