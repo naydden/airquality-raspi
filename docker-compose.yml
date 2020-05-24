@@ -14,6 +14,14 @@ services:
         volumes:
             - mongodb_air:/data/db
     test:
-        build: './test'
+        build:
+            context: .
+            dockerfile: ./test/Dockerfile
+    web:
+        build:
+            context: .
+            dockerfile: ./web/Dockerfile
+        ports:
+            - "5000:5000"
 volumes:
     mongodb_air:

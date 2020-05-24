@@ -22,13 +22,13 @@
 					<td>{{air.temperature}}</td>
 					<td>{{air.pressure}}</td>
 					<td>{{air.humidity}}</td>
-					<td>{{air.airquality}}</td>
+					<td>{{air.airq}}</td>
 				</tr>
 			{% endfor %}
 	  </tbody>
 	</table>
 	</div>
-	<div id="target_div">Watch this space...</div>
+<!-- 	<div id="target_div">Watch this space...</div>
 	<script type="text/javascript">
 		var targetContainer = document.getElementById("target_div");
 		var eventSource = new EventSource("/stream")
@@ -36,5 +36,5 @@
 			str = JSON.parse(e.data).str;
 			targetContainer.innerHTML = str;
 		};
-	</script>
+	</script> -->
 {% endblock %}

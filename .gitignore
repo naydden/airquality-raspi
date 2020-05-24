@@ -4,3 +4,4 @@ __pycache__/
 data/
 env.env
 dump.gz
+/web/static/scripts/

@@ -35,6 +35,7 @@ sensor.initialise(bme680)
 
 try:
 	mydb = connectToDB();
+	mycol = mydb["bme680"];
 	while True:
 		time.sleep(5)
 		data_dict = sensor.getData();

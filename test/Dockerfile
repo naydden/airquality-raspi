@@ -10,7 +10,8 @@ WORKDIR /app
 RUN pip3 install --upgrade pip
 RUN pip3 install pymongo
 
-COPY . /app
+COPY ./test/ /app
+COPY env.env /app
 
 ENTRYPOINT [ "python3" ]
 
