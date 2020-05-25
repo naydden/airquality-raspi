@@ -1,4 +1,4 @@
-import datetime, time, bme680, json
+import time, bme680, json
 from pi_bme680 import Sensor
 from pymongo import MongoClient,errors
 
@@ -40,16 +40,7 @@ try:
 	while True:
 		time.sleep(5)
 		data_dict = sensor.getData(gas_baseline);
-
-		mydoc = {
-					"timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(),
-					"temperature": data_dict['temperature'],
-					"pressure": data_dict['pressure'],
-					"humidity": data_dict['humidity'],
-					"airq": data_dict['airq']
-				}
-
-		mycol.insert_one(mydoc)
+		mycol.insert_one(data_dict)
 
 except errors.ServerSelectionTimeoutError as err:
 		# catch pymongo.errors.ServerSelectionTimeoutError

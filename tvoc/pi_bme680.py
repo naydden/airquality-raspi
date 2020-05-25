@@ -1,4 +1,4 @@
-import time
+import time, datetime
 
 class Sensor():
 
@@ -16,30 +16,30 @@ class Sensor():
 		self.sensor.select_gas_heater_profile(0)
 
 	def getGasSensorBaseline(self):
-		start_time = time.time(self)
+		start_time = time.time()
 		curr_time = time.time()
 		# takes 5 minutes to complete
 		burn_in_time = 300
 
 		burn_in_data = []
 
-	    print("Collecting gas resistance burn-in data for 5 mins\n")
-	    while curr_time - start_time < burn_in_time:
-	        curr_time = time.time()
-	        if self.sensor.get_sensor_data() and self.sensor.data.heat_stable:
-	            gas = self.sensor.data.gas_resistance
-	            burn_in_data.append(gas)
-	            print("Gas: {0} Ohms".format(gas))
-	            time.sleep(1)
+		print("Collecting gas resistance burn-in data for 5 mins\n")
+		while curr_time - start_time < burn_in_time:
+			curr_time = time.time()
+			if self.sensor.get_sensor_data() and self.sensor.data.heat_stable:
+				gas = self.sensor.data.gas_resistance
+				burn_in_data.append(gas)
+				print("Gas: {0} Ohms".format(gas))
+				time.sleep(1)
 
-	    gas_baseline = sum(burn_in_data[-50:]) / 50.0
+		gas_baseline = sum(burn_in_data[-50:]) / 50.0
 
-	    print("Gas baseline: {0} Ohms, humidity baseline: {1:.2f} %RH\n".format(gas_baseline, hum_baseline))
-	    return gas_baseline;
+		print("Gas baseline: {0} Ohms, humidity baseline: {1:.2f} %RH\n".format(gas_baseline, hum_baseline))
+		return gas_baseline;
 
 	def getAirQualityScore(self, gas_baseline):
-        gas =  self.sensor.data.gas_resistance
-        gas_offset = gas_baseline - gas
+		gas =  self.sensor.data.gas_resistance
+		gas_offset = gas_baseline - gas
 
 		# Set the humidity baseline to 40%, an optimal indoor humidity.
 		hum_baseline = 40.0
@@ -48,27 +48,27 @@ class Sensor():
 		# calculation of air_quality_score (25:75, humidity:gas)
 		hum_weighting = 0.25
 
-        hum = self.sensor.data.humidity
-        hum_offset = hum - hum_baseline
+		hum = self.sensor.data.humidity
+		hum_offset = hum - hum_baseline
 
-        # Calculate hum_score as the distance from the hum_baseline.
-        if hum_offset > 0:
-            hum_score = (100 - hum_baseline - hum_offset) / (100 - hum_baseline) * (hum_weighting * 100)
+		# Calculate hum_score as the distance from the hum_baseline.
+		if hum_offset > 0:
+			hum_score = (100 - hum_baseline - hum_offset) / (100 - hum_baseline) * (hum_weighting * 100)
 
-        else:
-            hum_score = (hum_baseline + hum_offset) / hum_baseline * (hum_weighting * 100)
+		else:
+			hum_score = (hum_baseline + hum_offset) / hum_baseline * (hum_weighting * 100)
 
-        # Calculate gas_score as the distance from the gas_baseline.
-        if gas_offset > 0:
-            gas_score = (gas / gas_baseline) * (100 - (hum_weighting * 100))
+		# Calculate gas_score as the distance from the gas_baseline.
+		if gas_offset > 0:
+			gas_score = (gas / gas_baseline) * (100 - (hum_weighting * 100))
 
-        else:
-            gas_score = 100 - (hum_weighting * 100)
+		else:
+			gas_score = 100 - (hum_weighting * 100)
 
-        # Calculate air_quality_score
-        air_quality_score = hum_score + gas_score
+		# Calculate air_quality_score
+		air_quality_score = hum_score + gas_score
 
-        return air_quality_score;
+		return air_quality_score;
 
 	def getData(self, gas_baseline):
 		data_dict = {};
@@ -79,7 +79,7 @@ class Sensor():
 			data_dict['temperature'] = self.sensor.data.temperature;
 			data_dict['pressure'] = self.sensor.data.pressure;
 			data_dict['humidity'] = self.sensor.data.humidity;
-			data_dict['airq'] = getAirQualityScore(gas_baseline);
+			data_dict['airq'] = self.getAirQualityScore(gas_baseline);
 		else:
 			data_dict['timestamp'] = datetime.datetime.now().replace(microsecond=0).isoformat();
 			data_dict['temperature'] = 0;

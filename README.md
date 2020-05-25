@@ -22,3 +22,8 @@ Technology:
 It is intended to function as a home monitoring system, pushing data in real time to any client that may be listening on a specific port.
 
 Requirements:
+
+
+Challenges:
+- Docker exposing i2c device
+- Mongodb on raspberry pi armvl7
