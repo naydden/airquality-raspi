@@ -1,4 +1,5 @@
 from pymongo import MongoClient,errors
+import datetime
 
 # global variables for MongoDB host (default port is 27017)
 DOMAIN = 'mydb'
@@ -26,6 +27,7 @@ try:
 	# print the version of MongoDB server if connection successful
 	print ("server version:", client.server_info()["version"])
 
+	# client.drop_database('air_data')
 	# creates my db
 	mydb = client["air_data"]
 
@@ -38,9 +40,9 @@ try:
 	# checks if collection exists
 	print(mydb.list_collection_names())
 
-	mydoc = { "timestamp": 3, "temperature": 0, "pressure": 0, "humidity": 0, "airq": 0 }
+	mydoc = { "timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(), "temperature": 0, "pressure": 0, "humidity": 0, "airq": 0 }
 	mycol.insert_one(mydoc)
-	mydoc = { "timestamp": 4, "temperature": 1, "pressure": 2, "humidity": 3, "airq": 4 }
+	mydoc = { "timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(), "temperature": 1, "pressure": 2, "humidity": 3, "airq": 4 }
 	mycol.insert_one(mydoc)
 
 	for x in mycol.find():

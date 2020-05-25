@@ -5,10 +5,10 @@ services:
         container_name: mydb
         image: mongo:latest
         env_file:
-            - env.env
+            - ./env.env
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=${MONGODB_USER}
-            - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_PASS}
+            - MONGO_INITDB_ROOT_USERNAME=$${MONGODB_USER}
+            - MONGO_INITDB_ROOT_PASSWORD=$${MONGODB_PASS}
         ports:
             - '27017:27017'
         volumes:
@@ -17,6 +17,8 @@ services:
         build:
             context: .
             dockerfile: ./test/Dockerfile
+        depends_on:
+            - mydb
     web:
         build:
             context: .

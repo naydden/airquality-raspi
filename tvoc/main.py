@@ -18,14 +18,14 @@ def getEnv():
 
 def connectToDB():
 	client = MongoClient(
-		host = [ str(DOMAIN) + ":" + str(PORT) ],
+		host = [ str(DB_DOMAIN) + ":" + str(DB_PORT) ],
 		serverSelectionTimeoutMS = 3000, # 3 second timeout
 		username = getEnv()['MONGODB_USER'],
 		password = getEnv()['MONGODB_PASS'],
 	)
 
 	# creates/selects db
-	mydb = client["air_data"]
+	mydb = client["air_data_prod"]
 	return mydb;
 
 ### Initialise the sensor

@@ -1,81 +1,16 @@
 {% extends "layout.html" %}
 {% block title %}BME680{% endblock %}
 {% block content %}
-	<h1 class="cover-heading">Current data: </h1>
-	<div style="height: 300px; overflow-y: scroll;">
-	<table class="table">
-	  <thead>
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">Timestamp</th>
-			<th scope="col">Temperature [ºC]</th>
-			<th scope="col">Pressure [hPa]</th>
-			<th scope="col">Humidity [%]</th>
-			<th scope="col">Air Quality [0-100]</th>
-		</tr>
-	  </thead>
-	  <tbody>
-			{% for air in air_data %}
-				<tr>
-					<th scope="row">{{air.id}}</th>
-					<td>{{air.timestamp}}</td>
-					<td>{{air.temperature}}</td>
-					<td>{{air.pressure}}</td>
-					<td>{{air.humidity}}</td>
-					<td>{{air.airq}}</td>
-				</tr>
-			{% endfor %}
-	  </tbody>
-	</table>
+	<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+		<div id="temperature" style="padding-bottom: 10px;"></div>
+		<div id="pressure" style="padding-bottom: 10px;"></div>
 	</div>
-	<div id="my_dataviz"></div>
-	<script>
-	var graphData = {{  air_data | safe }}
-
-	// set the dimensions and margins of the graph
-	var margin = {top: 10, right: 30, bottom: 30, left: 60},
-		width = 460 - margin.left - margin.right,
-		height = 400 - margin.top - margin.bottom;
-
-	// append the svg object to the body of the page
-	var svg = d3.select("#my_dataviz")
-	  .append("svg")
-		.attr("width", width + margin.left + margin.right)
-		.attr("height", height + margin.top + margin.bottom)
-	  .append("g")
-		.attr("transform",
-			  "translate(" + margin.left + "," + margin.top + ")");
-
-  	function draw(data) {
-
-		// Add X axis --> it is a date format
-		var x = d3.scaleLinear()
-			.domain([0, d3.max(data, function(d) { return +d.timestamp; })])
-			.range([ 0, width ]);
-		svg.append("g")
-			.attr("transform", "translate(0," + height + ")")
-			.call(d3.axisBottom(x));
-
-		// Add Y axis
-		var y = d3.scaleLinear()
-			.domain([0, d3.max(data, function(d) { return +d.temperature; })])
-			.range([ height, 0 ]);
-		svg.append("g")
-			.call(d3.axisLeft(y));
-
-		// Add dots
-		svg.append('g')
-			.selectAll("dot")
-			.data(data)
-			.enter()
-			.append("circle")
-				.attr("cx", function (d) { return x(d.timestamp); } )
-				.attr("cy", function (d) { return y(d.temperature); } )
-				.attr("r", 1.5)
-				.style("fill", "#69b3a2")
-	}
-
-	draw(graphData);
-
-	</script>
+	<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+		<div id="humidity" style="padding-bottom: 10px;"></div>
+		<div id="airquality" style="padding-bottom: 10px;"></div>
+	</div>
+    <script>
+		var air_data = {{ air_data|tojson }};
+    </script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'scripts/bme680.js') }}"></script>
 {% endblock %}
