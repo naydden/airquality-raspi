@@ -13,10 +13,10 @@ services:
             - '27017:27017'
         volumes:
             - mongodb_air:/data/db
-    test:
+    tvoc:
         build:
             context: .
-            dockerfile: ./test/Dockerfile
+            dockerfile: ./tvoc/Dockerfile
         depends_on:
             - mydb
     web:
@@ -25,5 +25,7 @@ services:
             dockerfile: ./web/Dockerfile
         ports:
             - "5000:5000"
+        depends_on:
+            - mydb
 volumes:
     mongodb_air:

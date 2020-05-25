@@ -31,14 +31,15 @@ def connectToDB():
 ### Initialise the sensor
 sensor = Sensor(bme680)
 sensor.initialise(bme680)
-
+gas_baseline =  sensor.getGasSensorBaseline();
+print("Gas baseline obtained");
 
 try:
 	mydb = connectToDB();
 	mycol = mydb["bme680"];
 	while True:
 		time.sleep(5)
-		data_dict = sensor.getData();
+		data_dict = sensor.getData(gas_baseline);
 
 		mydoc = {
 					"timestamp": datetime.datetime.now().replace(microsecond=0).isoformat(),
@@ -49,7 +50,6 @@ try:
 				}
 
 		mycol.insert_one(mydoc)
-		print(data_dict['str']);
 
 except errors.ServerSelectionTimeoutError as err:
 		# catch pymongo.errors.ServerSelectionTimeoutError

@@ -70,11 +70,9 @@ class Sensor():
 
         return air_quality_score;
 
-	def getData(self):
+	def getData(self, gas_baseline):
 		data_dict = {};
 		output = '';
-
-		gas_baseline = getGasSensorBaseline();
 
 		if self.sensor.get_sensor_data() and self.sensor.data.heat_stable:
 			data_dict['timestamp'] = datetime.datetime.now().replace(microsecond=0).isoformat();

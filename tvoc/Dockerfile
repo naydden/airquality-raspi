@@ -8,7 +8,7 @@ RUN apt-get update -y && \
 
 RUN apt-get install -y git
 
-COPY ./requirements.txt /app/requirements.txt
+COPY ./tvoc/requirements.txt /app/requirements.txt
 
 
 WORKDIR /app
@@ -26,7 +26,8 @@ RUN python3 setup.py install
 WORKDIR ../../
 RUN pip3 install bme680
 
-COPY . /app
+COPY ./tvoc/ /app
+COPY env.env /app
 
 ENTRYPOINT [ "python3" ]
 

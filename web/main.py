@@ -26,7 +26,7 @@ def connectToDB():
 	)
 
 	# creates/selects db
-	mydb = client["air_data"]
+	mydb = client["air_data_prod"]
 	return mydb;
 
 
