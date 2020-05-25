@@ -4,11 +4,9 @@ MAINTAINER Boyan Naydenov "boyan.naydenov@gmail.com"
 
 RUN apt-get update -y && \
     apt-get install -y python3 python3-dev python3-pip && \
-    apt-get instlal -y python3-smbus
+    apt-get install -y python3-smbus
 
 RUN apt-get install -y git
-
-COPY ./tvoc/requirements.txt /app/requirements.txt
 
 
 WORKDIR /app

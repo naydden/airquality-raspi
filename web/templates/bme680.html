@@ -11,6 +11,7 @@
 	</div>
     <script>
 		var air_data = {{ air_data|tojson }};
+		console.log(air_data)
     </script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'scripts/bme680.js') }}"></script>
 {% endblock %}

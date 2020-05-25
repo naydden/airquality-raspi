@@ -21,12 +21,10 @@ def connectToDB():
 	client = MongoClient(
 		host = [ str(DB_DOMAIN) + ":" + str(DB_PORT) ],
 		serverSelectionTimeoutMS = 3000, # 3 second timeout
-		username = getEnv()['MONGODB_USER'],
-		password = getEnv()['MONGODB_PASS'],
 	)
 
 	# creates/selects db
-	mydb = client["air_data_prod"]
+	mydb = client["air_data"]
 	return mydb;
 
 
@@ -41,6 +39,7 @@ def index():
 def bme680():
 	air_data = [];
 	try:
+		print("ENTRANDO")
 		mydb = connectToDB();
 		mycol = mydb["bme680"]
 		for x in mycol.find():
@@ -52,6 +51,7 @@ def bme680():
 				'airq' : x['airq']
 			}
 			air_data.append(data);
+		print(air_data);
 	except errors.ServerSelectionTimeoutError as err:
 			# catch pymongo.errors.ServerSelectionTimeoutError
 			print ("pymongo ERROR:", err)
