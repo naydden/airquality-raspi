@@ -8,14 +8,6 @@ DB_DOMAIN = 'mydb'
 DB_PORT = 27017
 
 
-def getEnv():
-	env = {}
-	with open("../env.env") as f:
-		for line in f.readlines():
-			key, value = line.rstrip("\n").split("=")
-			env[key] = value
-	return env;
-
 def connectToDB():
 	client = MongoClient(
 		host = [ str(DB_DOMAIN) + ":" + str(DB_PORT) ],

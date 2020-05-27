@@ -53,7 +53,18 @@ function draw(data) {
 
 	// Add Y axis
 	var y = d3.scaleLinear()
-		.domain([0, d3.max(data, function(d) {
+		.domain([
+		0.90*d3.min(data, function(d) {
+			if(variable == "temperature")
+				return +(d.temperature);
+			else if(variable == "pressure")
+				return +(d.pressure);
+			else if(variable == "humidity")
+				return +(d.humidity);
+			else if(variable == "airquality")
+				return 0;
+		})		,
+		1.10*d3.max(data, function(d) {
 			if(variable == "temperature")
 				return +(d.temperature);
 			else if(variable == "pressure")
@@ -62,7 +73,8 @@ function draw(data) {
 				return +(d.humidity);
 			else if(variable == "airquality")
 				return +(d.airq);
-		})])
+		})
+		])
 		.range([ height, 0 ]);
 
 	svg.append("g")

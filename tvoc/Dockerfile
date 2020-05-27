@@ -24,7 +24,6 @@ WORKDIR ../../
 RUN pip3 install bme680
 
 COPY ./tvoc/ /app
-COPY env.env /app
 
 ENTRYPOINT [ "python3" ]
 
