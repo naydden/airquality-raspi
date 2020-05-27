@@ -6,7 +6,7 @@ Micro-service application that measures air quality together with temperature, p
 - **mydb**: saves data into a persistent database (MongoDB).
 - **web**: shows data from mydb into the browser (flask + bootstrap + d3 v5).
 
-The **test** service is used within the x86 branch for testing purposes. It substitutes the job of tvoc during development for faster iteration. It basically fills the database with fresh values when running the application on a x86 machine.
+The **test** service is used within the x86 branch for testing purposes. It substitutes the job of *tvoc* during development for faster iteration. It basically fills the database with fresh values when running the application on a x86 machine.
 
 
 ## Required technology:
@@ -52,7 +52,7 @@ Some challenges I ran into:
 
 To interact with the sensor, there is an open-source library from Pimoroni and a proprietary one, from Bosch, which is only available in C.
 
-- [Pimoroni](https://pypi.org/project/bme680/).
+- [Pimoroni](https://pypi.org/project/bme680/)
 - [Bosch](https://github.com/BoschSensortec/BME680_driver)
 
 The air quality score calculation can be tricky.
