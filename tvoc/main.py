@@ -20,12 +20,10 @@ def connectToDB():
 	client = MongoClient(
 		host = [ str(DB_DOMAIN) + ":" + str(DB_PORT) ],
 		serverSelectionTimeoutMS = 3000, # 3 second timeout
-		username = getEnv()['MONGODB_USER'],
-		password = getEnv()['MONGODB_PASS'],
 	)
 
 	# creates/selects db
-	mydb = client["air_data_prod"]
+	mydb = client["air_data"]
 	return mydb;
 
 ### Initialise the sensor
@@ -38,7 +36,7 @@ try:
 	mydb = connectToDB();
 	mycol = mydb["bme680"];
 	while True:
-		time.sleep(5)
+		time.sleep(60)
 		data_dict = sensor.getData(gas_baseline);
 		mycol.insert_one(data_dict)
 

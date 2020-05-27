@@ -34,7 +34,11 @@ class Sensor():
 
 		gas_baseline = sum(burn_in_data[-50:]) / 50.0
 
+<<<<<<< HEAD
 		print("Gas baseline: {0} Ohms, humidity baseline: {1:.2f} %RH\n".format(gas_baseline, hum_baseline))
+=======
+		#print("Gas baseline: {0} Ohms, humidity baseline: {1:.2f} %RH\n".format(gas_baseline, hum_baseline))
+>>>>>>> raspi_config
 		return gas_baseline;
 
 	def getAirQualityScore(self, gas_baseline):

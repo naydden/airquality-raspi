@@ -3,17 +3,20 @@ version: '3'
 services:
     mydb:
         container_name: mydb
-        image: mongo:latest
+        image: andresvidal/rpi3-mongodb3
         ports:
             - '27017:27017'
         volumes:
             - mongodb_air:/data/db
-    test:
+        command: bash -c "mongod --repair && mongod"
+    tvoc:
         build:
             context: .
-            dockerfile: ./test/Dockerfile
+            dockerfile: ./tvoc/Dockerfile
         depends_on:
             - mydb
+        devices:
+            - /dev/i2c-1:/dev/i2c-1
     web:
         build:
             context: .

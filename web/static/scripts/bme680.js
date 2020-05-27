@@ -1,5 +1,5 @@
 var graphData = air_data;
-
+console.log(graphData)
 // set the dimensions and margins of the graph
 var margin = {top: 30, right: 10, bottom: 20, left: 50},
 	width = 250 - margin.left - margin.right,

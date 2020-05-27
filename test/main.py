@@ -16,10 +16,10 @@ try:
 	# print the version of MongoDB server if connection successful
 	print ("server version:", client.server_info()["version"])
 
-	# client.drop_database('air_data')
+	client.drop_database('air_data')
 	# creates my db
-	mydb = client["air_data"]
-
+	#mydb = client["air_data"]
+	exit();
 	# get the database_names from the MongoClient()
 	database_names = client.list_database_names()
 	print ("\ndatabases:", database_names)

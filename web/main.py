@@ -31,6 +31,7 @@ def index():
 def bme680():
 	air_data = [];
 	try:
+		print("ENTRANDO")
 		mydb = connectToDB();
 		mycol = mydb["bme680"]
 		for x in mycol.find():
@@ -42,6 +43,7 @@ def bme680():
 				'airq' : x['airq']
 			}
 			air_data.append(data);
+		print(air_data);
 	except errors.ServerSelectionTimeoutError as err:
 			# catch pymongo.errors.ServerSelectionTimeoutError
 			print ("pymongo ERROR:", err)
