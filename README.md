@@ -13,18 +13,18 @@ The **test** service is used within the x86 branch for testing purposes. It subs
 
 - BME680 sensor
 - Raspberry Pi
-- Docker, Docker-composer, Flask, D3, MongoDB, Bootstrap
+- Docker, Docker-compose, Flask, D3, MongoDB, Bootstrap
 
 In order to run the project one needs to:
 
-1. Install docker and docker-composer
+1. Install docker and docker-compose
 2. Download jquery and put it under /web/static/jquery/.
 3. Download bootstrap and put it under /web/static/bootstrap/.
 4. Download d3 and put it under /web/static/d3/.
 
 ## Thoughts
 
-This was my first project with a micro-services architecture and I am quite happy with the results. It allowed me to separate the different problems and tackle them in an easier and more organised way. The flexibility it offers is great too. I was able to easily switch between *tvoc* and *test* when changing the environment from the raspberry pi to my computer. On the other hand, docker containerisation is great for portability and dependencies management. Needless to say, docker-composer does a great job managing the different services making the overall work-flow much easier.
+This was my first project with a micro-services architecture and I am quite happy with the results. It allowed me to separate the different problems and tackle them in an easier and more organised way. The flexibility it offers is great too. I was able to easily switch between *tvoc* and *test* when changing the environment from the raspberry pi to my computer. On the other hand, docker containerisation is great for portability and dependencies management. Needless to say, docker-compose does a great job managing the different services making the overall work-flow much easier.
 
 Some challenges I ran into:
 
