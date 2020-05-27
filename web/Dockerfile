@@ -13,7 +13,6 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt
 
 COPY ./web/ /app
-COPY env.env /app
 
 ENTRYPOINT [ "python3" ]
 

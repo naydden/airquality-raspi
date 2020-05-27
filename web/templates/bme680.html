@@ -11,6 +11,18 @@
 	</div>
     <script>
 		var air_data = {{ air_data|tojson }};
+		document.getElementById('temperature').onclick = function() {
+			location.assign('/bme680/temperature');
+		}
+		document.getElementById('pressure').onclick = function() {
+			location.assign('/bme680/pressure');
+		}
+		document.getElementById('humidity').onclick = function() {
+			location.assign('/bme680/humidity');
+		}
+		document.getElementById('airquality').onclick = function() {
+			location.assign('/bme680/airquality');
+		}
     </script>
 	<script type="text/javascript" src="{{ url_for('static', filename = 'scripts/bme680.js') }}"></script>
 {% endblock %}

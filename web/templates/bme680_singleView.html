@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}BME680{% endblock %}
+{% block content %}
+	<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+		<div id="plot" style="padding-bottom: 10px;"></div>
+	</div>
+    <script>
+		var air_data = {{ air_data | tojson }};
+		var variable = {{ variable | tojson }};
+    </script>
+	<script type="text/javascript" src="{{ url_for('static', filename = 'scripts/bme680_singleView.js') }}"></script>
+{% endblock %}

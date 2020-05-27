@@ -5,23 +5,12 @@ import datetime
 DOMAIN = 'mydb'
 PORT = 27017
 
-def getEnv():
-	env = {}
-	with open("env.env") as f:
-		for line in f.readlines():
-			key, value = line.rstrip("\n").split("=")
-			env[key] = value
-	return env;
-
-
 # use a try-except indentation to catch MongoClient() errors
 try:
 	# try to instantiate a client instance
 	client = MongoClient(
 		host = [ str(DOMAIN) + ":" + str(PORT) ],
 		serverSelectionTimeoutMS = 3000, # 3 second timeout
-		username = getEnv()['MONGODB_USER'],
-		password = getEnv()['MONGODB_PASS'],
 	)
 
 	# print the version of MongoDB server if connection successful

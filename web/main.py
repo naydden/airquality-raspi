@@ -9,24 +9,14 @@ app = Flask(__name__)
 DB_DOMAIN = 'mydb'
 DB_PORT = 27017
 
-def getEnv():
-	env = {}
-	with open("env.env") as f:
-		for line in f.readlines():
-			key, value = line.rstrip("\n").split("=")
-			env[key] = value
-	return env;
-
 def connectToDB():
 	client = MongoClient(
 		host = [ str(DB_DOMAIN) + ":" + str(DB_PORT) ],
 		serverSelectionTimeoutMS = 3000, # 3 second timeout
-		username = getEnv()['MONGODB_USER'],
-		password = getEnv()['MONGODB_PASS'],
 	)
 
 	# creates/selects db
-	mydb = client["air_data_prod"]
+	mydb = client["air_data"]
 	return mydb;
 
 
@@ -58,24 +48,40 @@ def bme680():
 			exit();
 	return render_template('bme680.html', air_data=air_data)
 
-@app.route('/stream')
-def stream():
-	def eventStream():
-		while True:
-			time.sleep(1)
-			st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
-			data_dict = sensor.getData();
 
-			# DBSession = sessionmaker(bind=engine)
-			# session = DBSession()
-			# session.add(Air(timestamp=st, airquality=data_dict['airq'], temperature=data_dict['temperature']
-			# 	, pressure=data_dict['pressure'], humidity=data_dict['humidity']))
-			# session.commit()
+@app.route('/bme680/<variable>')
+def bme680_temp(variable):
+	air_data = [];
+	try:
+		mydb = connectToDB();
+		mycol = mydb["bme680"]
+		for x in mycol.find():
+			data = {
+				'timestamp' : x['timestamp'],
+				'temperature' : x['temperature'],
+				'pressure' : x['pressure'],
+				'humidity' : x['humidity'],
+				'airq' : x['airq']
+			}
+			air_data.append(data);
+	except errors.ServerSelectionTimeoutError as err:
+			# catch pymongo.errors.ServerSelectionTimeoutError
+			print ("pymongo ERROR:", err)
+			exit();
+	return render_template('bme680_singleView.html', air_data=air_data, variable=variable)
 
-			# yield jsonify(data_dict)
-			yield 'data: {}\n\n'.format(json.dumps(data_dict))
+# @app.route('/stream')
+# def stream():
+# 	def eventStream():
+# 		while True:
+# 			time.sleep(1)
+# 			st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+# 			data_dict = sensor.getData();
 
-	return Response(eventStream(), mimetype="text/event-stream")
+# 			# yield jsonify(data_dict)
+# 			yield 'data: {}\n\n'.format(json.dumps(data_dict))
+
+# 	return Response(eventStream(), mimetype="text/event-stream")
 
 
 if __name__ == '__main__':
