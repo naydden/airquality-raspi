@@ -18,9 +18,7 @@ The **test** service is used within the x86 branch for testing purposes. It subs
 In order to run the project one needs to:
 
 1. Install docker and docker-compose
-2. Download jquery and put it under /web/static/jquery/.
-3. Download bootstrap and put it under /web/static/bootstrap/.
-4. Download d3 and put it under /web/static/d3/.
+2. Run ``docker-compose up --build``
 
 ## Thoughts
 
