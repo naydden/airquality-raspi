@@ -15,12 +15,16 @@ RUN pip3 install pymongo
 
 COPY ./tvoc-bsec/ /app
 
+
 RUN git clone https://github.com/alexh-name/bsec_bme680_linux.git
 
-RUN mv ./BSEC_1.4.7.4_Generic_Release/ ./bsec_bme680_linux/src/
+ADD ./tvoc-bsec/BSEC_1.4.7.4_Generic_Release /app/bsec_bme680_linux/src/BSEC_1.4.7.4_Generic_Release
+
 WORKDIR ./bsec_bme680_linux/
 RUN rm -rf make.config
 RUN mv ../make.config .
+
+RUN ["chmod", "+x", "./make.sh"]
 RUN ./make.sh
 
 WORKDIR ../

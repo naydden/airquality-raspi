@@ -9,6 +9,12 @@ var strictIsoParse = d3.utcParse("%Y-%m-%dT%H:%M:%S")
 
 
 function draw(data) {
+
+	if(variable == "airquality") {
+		d3.select("#iaq_index")
+			.style('display', 'block !important');
+	}
+
 	// append the svg object to the body of the page
 	var svg = d3.select("#plot")
 	  .append("svg")
@@ -33,7 +39,7 @@ function draw(data) {
 			else if(variable == "humidity")
 				return "Humidity [%]";
 			else if(variable == "airquality")
-				return "Air Quality Index [0-100]";
+				return "Air Quality Index [0-500]";
 		});
 
 	// Add X axis --> it is a date format

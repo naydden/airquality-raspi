@@ -42,7 +42,7 @@ function draw(data, variable) {
 			else if(variable == "humidity")
 				return "Humidity [%]";
 			else if(variable == "airquality")
-				return "Air Quality Index [0-100]";
+				return "Air Quality Index [0-500]";
 		});
 
 	// Add X axis --> it is a date format

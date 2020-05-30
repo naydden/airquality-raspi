@@ -3,6 +3,14 @@
 {% block content %}
 	<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
 		<div id="plot" style="padding-bottom: 10px;"></div>
+		<div id="iaq_index" stlye="display: none;">
+			<figure>
+				<img src="{{ url_for('static', filename = 'iaq_index.png') }}" width="500" >
+				<figcaption>
+					<a href="https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme680-ds001.pdf">Extracted from Bosch Sensortec bme680 datasheet.</a>
+				</figcaption>
+			</figure>
+		</div>
 	</div>
     <script>
 		var air_data = {{ air_data | tojson }};
