@@ -9,10 +9,10 @@ services:
         volumes:
             - mongodb_air:/data/db
         command: bash -c "mongod --repair && mongod"
-    tvoc:
+    tvoc-bsec:
         build:
             context: .
-            dockerfile: ./tvoc/Dockerfile
+            dockerfile: ./tvoc-bsec/Dockerfile
         depends_on:
             - mydb
         devices:
