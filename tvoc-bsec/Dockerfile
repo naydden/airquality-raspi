@@ -23,11 +23,12 @@ ADD ./tvoc-bsec/BSEC_1.4.7.4_Generic_Release /app/bsec_bme680_linux/src/BSEC_1.4
 WORKDIR ./bsec_bme680_linux/
 RUN rm -rf make.config
 RUN mv ../make.config .
+RUN mv ../bsec_iaq.state .
 
 RUN ["chmod", "+x", "./make.sh"]
 RUN ./make.sh
 
-WORKDIR ../
+RUN mv ../main.py .
 
 ENTRYPOINT [ "python3" ]
 
