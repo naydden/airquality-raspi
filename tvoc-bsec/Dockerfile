@@ -17,7 +17,7 @@ COPY ./tvoc-bsec/ /app
 
 RUN git clone https://github.com/alexh-name/bsec_bme680_linux.git
 
-RUN mv ./bsec_library/BSEC_1.4.7.4_Generic_Release/ ./bsec_bme680_linux/src/
+RUN mv ./BSEC_1.4.7.4_Generic_Release/ ./bsec_bme680_linux/src/
 WORKDIR ./bsec_bme680_linux/
 RUN rm -rf make.config
 RUN mv ../make.config .
