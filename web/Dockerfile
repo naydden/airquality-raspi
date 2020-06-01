@@ -16,11 +16,11 @@ COPY ./web/ /app
 
 WORKDIR /app/static/static
 
-RUN curl -S -o ./d3/d3.v5.min.js https://d3js.org/d3.v5.min.js
-RUN curl -SL -o zipped.zip https://github.com/twbs/bootstrap/releases/download/v4.3.1/bootstrap-4.3.1-dist.zip && \
+RUN curl -S -ko ./d3/d3.v5.min.js https://d3js.org/d3.v5.min.js
+RUN curl -SL -ko zipped.zip https://github.com/twbs/bootstrap/releases/download/v4.3.1/bootstrap-4.3.1-dist.zip && \
     unzip zipped.zip -d ./bootstrap && \
     rm -f zipped.zip
-RUN curl -S -o ./jquery/jquery-3.5.0.min.js https://code.jquery.com/jquery-3.5.0.min.js
+RUN curl -S -ko ./jquery/jquery-3.5.0.min.js https://code.jquery.com/jquery-3.5.0.min.js
 
 WORKDIR /app
 
